@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+    </style>
+
+    <meta charset="UTF-8"/>
+    <title>Main User Page</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+
+</head>
+<body>
+
+<!--&lt;!&ndash; Navigation &ndash;&gt;-->
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">-->
+<!--    <div class="container">-->
+<!--        <a class="navbar-brand" href="/">BDBT Spring Boot Project - Part II</a>-->
+<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"-->
+<!--                aria-controls="navbarResponsive"-->
+<!--                aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarResponsive">-->
+<!--            <ul class="navbar-nav ml-auto">-->
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:href="@{/index}">Home</a>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item active">-->
+<!--                    <a class="nav-link" href="#">Main-->
+<!--                        <span class="sr-only">(current)</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">Zostałeś zalogowany jako <b-->
+<!--                            style="text-transform:capitalize">[[${#httpServletRequest.remoteUser}]]</b></a>-->
+<!--                </li>-->
+
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--<div class="container">-->
+<!--    <div class="row">-->
+
+<!--        <div class="col-md-10 mt-5">-->
+<!--            <form method="post" th:action="@{/index}">-->
+<!--                <div class="form-group">-->
+<!--                    <label style="font-size:30px" th:inline="text">Welcome <a-->
+<!--                            style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>-->
+<!--                        to the main page!</label>-->
+<!--                    <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>-->
+<!--                </div>-->
+
+<!--                <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout-->
+<!--                </button>-->
+<!--            </form>-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<script th:src="@{/webjars/jquery/jquery.min.js}"></script>-->
+<!--<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>-->
+<!--<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+<!--<script th:src="@{/js/script.js}"></script>-->
+
+
+<div>
+    <h1>Pracownicy</h1>
+
+    <a href="/new">Wpisz nowego pracownika</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Data urodzenia</th>
+            <th>Płeć</th>
+            <th>Stanowisko</th>
+            <th>Płaca</th>
+            <th>Adres email</th>
+            <th>Nr telefonu</th>
+            <th>Data zatrudnienia</th>
+            <th>Data zwolnienia</th>
+            <th>ID domu</th>
+            <th>ID adresu</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pracownicy : ${listPracownicy}">
+            <td th:text="${pracownicy.id}">ID</td>
+            <td th:text="${pracownicy.imie}">Imie</td>
+            <td th:text="${pracownicy.nazwisko}">Nazwisko</td>
+            <td th:text="${pracownicy.data_urodzenia}">Data urodzenia</td>
+            <td th:text="${pracownicy.plec}">Płeć</td>
+            <td th:text="${pracownicy.stanowisko}">Stanowisko</td>
+            <td th:text="${pracownicy.placa}">Płaca</td>
+            <td th:text="${pracownicy.adres_email}">Adres email</td>
+            <td th:text="${pracownicy.telefon}">Nr telefonu</td>
+            <td th:text="${pracownicy.data_zatrudnienia}">Data zatrudnienia</td>
+            <td th:text="${pracownicy.data_zwolnienia}">Data zwolnienia</td>
+            <td th:text="${pracownicy.id_domu}">ID domu</td>
+            <td th:text="${pracownicy.id_adresu}">ID adresu</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
