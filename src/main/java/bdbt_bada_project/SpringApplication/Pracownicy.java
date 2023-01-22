@@ -1,7 +1,7 @@
 package bdbt_bada_project.SpringApplication;
 
 public class Pracownicy {
-    private int id;
+    private int id_pracownika;
     private String imie;
     private String nazwisko;
     private String data_urodzenia;
@@ -17,8 +17,8 @@ public class Pracownicy {
 
     public Pracownicy() {
     }
-    public Pracownicy(int id, String imie, String nazwisko, String data_urodzenia, String plec, String stanowisko, int placa, String adres_email, String telefon, String data_zatrudnienia, String data_zwolnienia, int id_domu, int id_adresu) {
-        this.id = id;
+    public Pracownicy(int id_pracownika, String imie, String nazwisko, String data_urodzenia, String plec, String stanowisko, int placa, String adres_email, String telefon, String data_zatrudnienia, String data_zwolnienia, int id_domu, int id_adresu) {
+        this.id_pracownika = id_pracownika;
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.data_urodzenia = data_urodzenia;
@@ -33,12 +33,10 @@ public class Pracownicy {
         this.id_adresu = id_adresu;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId_pracownika() {return id_pracownika;}
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_pracownika(int id_pracownika) {
+        this.id_pracownika = id_pracownika;
     }
 
     public String getImie() {
@@ -140,7 +138,7 @@ public class Pracownicy {
     @Override
     public String toString() {
         return "Pracownicy{" +
-                "id=" + id +
+                "id=" + id_pracownika +
                 ", imie='" + imie + '\'' +
                 ", nazwisko='" + nazwisko + '\'' +
                 ", data_urodzenia='" + data_urodzenia + '\'' +

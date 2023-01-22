@@ -3,9 +3,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -27,18 +26,18 @@ public class AppController implements WebMvcConfigurer {
         return "user/main_user";
     }
 
-//    @RequestMapping(value = {"/new_worker"})
-//    public String showNewWorker(Model model) {
-//        Pracownicy pracownicy = new Pracownicy();
-//        model.addAttribute("pracownicy", pracownicy);
-//        return "admin/new_worker";
-//    }
+    @RequestMapping(value = {"/new_worker"})
+    public String showNewWorker(Model model) {
+        Pracownicy pracownicy = new Pracownicy();
+        model.addAttribute("pracownicy", pracownicy);
+        return "admin/new_worker";
+    }
 
-//    @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
-//    public String save(@ModelAttribute("pracownicy") Pracownicy pracownicy) {
-//        dao.save(pracownicy);
-//        return "admin/redirect:/";
-//    }
+    @RequestMapping(value = {"/save"}, method = RequestMethod.POST)
+    public String save(@ModelAttribute("pracownicy") Pracownicy pracownicy) {
+        dao.save(pracownicy);
+        return "redirect:/main_admin";
+    }
 
     @RequestMapping(value = {"/main_admin"})
     public String showAdminPage(Model model) {
@@ -47,6 +46,25 @@ public class AppController implements WebMvcConfigurer {
         return "admin/main_admin";
     }
 
+    @RequestMapping("/edit/{id}")
+    public ModelAndView showEditForm(@PathVariable(name = "id") int id) {
+        ModelAndView mav = new ModelAndView("admin/edit_form");
+        Pracownicy pracownicy = dao.get(id);
+        mav.addObject("pracownicy", pracownicy);
+        return mav;
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@ModelAttribute("pracownicy") Pracownicy pracownicy) {
+        dao.update(pracownicy);
+        return "redirect:/main_admin";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable(name= "id") int id) {
+        dao.delete(id);
+        return "redirect:/main_admin";
+    }
 
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
@@ -56,6 +74,10 @@ public class AppController implements WebMvcConfigurer {
         registry.addViewController("/main_admin").setViewName("admin/main_admin");
         registry.addViewController("/main_user").setViewName("user/main_user");
         registry.addViewController("/new_worker").setViewName("admin/new_worker");
+        registry.addViewController("/save").setViewName("admin/main_admin");
+        registry.addViewController("/update").setViewName("admin/main_admin");
+        registry.addViewController("/delete/{id}").setViewName("admin/main_admin");
+        registry.addViewController("/edit/{id}").setViewName("admin/edit_form");
     }
 
     @Controller

@@ -52,10 +52,10 @@
         <div class="col-md-10 mt-5">
             <form method="post" th:action="@{/index}">
                 <div class="form-group">
-                    <label style="font-size:30px" th:inline="text">Welcome <a
+                    <label style="font-size:30px" th:inline="text">Zalogowałeś się na profil <a
                             style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
-                        to the main page!</label>
-                    <div style="font-size:20px">If you want to logout, click "Logout" button under this text.</div>
+                        </label>
+                    <div style="font-size:20px"></div>
                 </div>
 
                 <button class="btn btn-primary" type="submit" onclick="successfullyLogout()" value="Sign Out">Logout
@@ -63,12 +63,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-10 mt-5">
-                            <div style="font-size:20px">Jeżeli chcesz stworzyć nowego pracownika kliknij <a th:href="@{/new_worker}"><b>tutaj</b></a>
+                            <div style="font-size:20px"><a th:href="@{/new_worker}"><b>Stwórz nowego pracownika</b></a>
                             </div>
 
                         </div>
                     </div>
                 </div>
+
             </form>
         </div>
 
@@ -78,7 +79,9 @@
 
 <div>
     <h1>Pracownicy</h1>
-    <h3>${listPracownicy}</h3>
+
+    <br/><br/>
+
     <table>
         <thead>
         <tr>
@@ -100,7 +103,7 @@
         </thead>
         <tbody>
         <tr th:each="pracownicy : ${listPracownicy}">
-            <td th:text="${pracownicy.id}">ID</td>
+            <td th:text="${pracownicy.id_pracownika}">ID</td>
             <td th:text="${pracownicy.imie}">Imie</td>
             <td th:text="${pracownicy.nazwisko}">Nazwisko</td>
             <td th:text="${pracownicy.data_urodzenia}">Data urodzenia</td>
@@ -113,6 +116,11 @@
             <td th:text="${pracownicy.data_zwolnienia}">Data zwolnienia</td>
             <td th:text="${pracownicy.id_domu}">ID domu</td>
             <td th:text="${pracownicy.id_adresu}">ID adresu</td>
+            <td>
+                <a th:href="@{'/edit/' + ${pracownicy.id_pracownika}}">Edytuj</a>
+<!--                &nbsp;&nbsp;&nbsp;&nbsp;-->
+                <a th:href="@{'/delete/' + ${pracownicy.id_pracownika}}">Usuń</a>
+            </td>
         </tr>
         </tbody>
     </table>
