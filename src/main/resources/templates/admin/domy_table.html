@@ -46,56 +46,53 @@
     </div>
 </nav>
 
+
 <div class="text-left">
-    <a th:href="@{/index}" class="btn btn-info" role="button" type="submit" onclick="successfullyLogout()">Logout
+    <a th:href="@{main_admin}" class="btn btn-info" type="submit">Back
     </a>
 </div>
 
-<div class="container">
-    <div class="row">
-
-        <div class="col-md-10 mt-5">
-            <form method="post" th:action="@{/index}">
-                <div class="form-group">
-                    <label style="font-size:30px" th:inline="text">Zalogowałeś się na profil <a
-                            style="color:lightskyblue; text-transform:capitalize"><b>[[${#httpServletRequest.remoteUser}]]</b></a>
-                        </label>
-                    <div style="font-size:20px"></div>
-                </div>
-            </form>
-        </div>
-
-    </div>
+<div>
+    <h1 class="text-center">Domy seniorów</h1>
 </div>
 
-<div class="card-group">
-    <div class="card text-white bg-success mb-3">
-        <div class="card-body">
-            <h5 class="card-title">Pracownicy</h5>
-            <p class="card-text">Kliknij w przycisk poniżej, aby dostać się do listy pracowników</p>
-            <a th:href="@{/pracownicy_table}" class="btn btn-primary">Przejdź</a>
-        </div>
-    </div>
-    <div class="card text-white bg-danger mb-3">
-        <div class="card-body">
-            <h5 class="card-title">Domy seniorów</h5>
-            <p class="card-text">Kliknij w przycisk poniżej, aby dostać się do listy domów seniorów</p>
-            <a th:href="@{/domy_table}" class="btn btn-primary">Przejdź</a>
-        </div>
-    </div>
+<br/>
+<div class="text-center">
+    <a th:href="@{new_house}" class="btn btn-success btn-lg" type="submit">Dodaj nowy dom seniora
+    </a>
 </div>
 
-<!--<div>-->
-<!--    <a th:href="@{pracownicy_table}" class="btn btn-primary" type="submit">Pracownicy-->
-<!--    </a>-->
-<!--</div>-->
+<br/><br/>
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>ID domu</th>
+            <th>nazwa</th>
+            <th>data założenia</th>
+            <th>Właściciel</th>
+            <th>ID adresu</th>
+            <th>Funkcje</th>
 
-<!--<br>-->
-
-<!--<div>-->
-<!--    <a th:href="@{domy_table}" class="btn btn-primary" type="submit">Domy Seniorów-->
-<!--    </a>-->
-<!--</div>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="domy : ${listDomy}">
+            <td th:text="${domy.id_domu}">ID domu</td>
+            <td th:text="${domy.nazwa}">Nazwa</td>
+            <td th:text="${domy.data_zalozenia}">Data założenia</td>
+            <td th:text="${domy.wlasciciel}">Właściciel</td>
+            <td th:text="${domy.id_adresu}">ID adresu</td>
+            <td>
+                <a th:href="@{'/editDom/' + ${domy.id_domu}}">Edytuj</a>
+                <a th:href="@{'/deleteDom/' + ${domy.id_domu}}">Usuń</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>

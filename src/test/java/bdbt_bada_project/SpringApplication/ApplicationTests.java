@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class PracownicyDAOTest {
 
 	private PracownicyDAO dao;
+	private DomyDAO daoDomy;
 	@BeforeEach
 	void setUp() throws Exception {
 		DriverManagerDataSource datasource = new DriverManagerDataSource();
@@ -23,6 +24,7 @@ class PracownicyDAOTest {
 		datasource.setPassword("BDBTGRC03");
 		datasource.setDriverClassName("oracle.jdbc.OracleDriver");
 		dao = new PracownicyDAO(new JdbcTemplate(datasource));
+		daoDomy = new DomyDAO(new JdbcTemplate(datasource));
 	}
 	@Test
 	void testList() {
@@ -30,12 +32,25 @@ class PracownicyDAOTest {
 		System.out.println(listPracownicy.get(0));
 		assertTrue(listPracownicy.isEmpty());
 	}
+
+	@Test
+	void testDomyList() {
+		List<Domy> listDomy = daoDomy.list();
+		System.out.println(listDomy.get(0));
+		assertTrue(listDomy.isEmpty());
+	}
 	@Test
 	void testSave() {
 		Pracownicy pracownicy = new Pracownicy(3,"Waclaw","Czwarty","12/ 2 /24","M",
 				"robotnik",200,"walcaw@o2.pl","123456789","13/3/25",
 				"14/4/27",1,2);
 		dao.save(pracownicy);
+	}
+
+	@Test
+	void testDomSave() {
+		Domy domy = new Domy(1,"Pod Kamieniem","12/12/12","Andrzej Kulfon",11);
+		daoDomy.save(domy);
 	}
 	@Test
 	void testGet() {
